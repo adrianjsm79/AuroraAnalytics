@@ -18,10 +18,10 @@ public class DashboardController {
 
     @GetMapping("/")
     public String index(Model model) {
-        // Estadísticas para el Dashboard
+        // Si alguna de estas funciones devuelve NULL o falla, la vista explota
         model.addAttribute("totalUsers", userService.countActiveUsers());
         model.addAttribute("totalDevices", deviceService.countTotalDevices());
-        model.addAttribute("lostDevicesCount", deviceService.getLostDevices().size());
+        model.addAttribute("lostDevicesCount", deviceService.getLostDevices().size()); // <-- OJO AQUÍ
         return "index";
     }
 
@@ -36,7 +36,7 @@ public class DashboardController {
         model.addAttribute("devices", deviceService.getAllDevices());
         return "devices/list";
     }
-    
+
     @GetMapping("/login")
     public String login() {
         return "login";

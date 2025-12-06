@@ -4,6 +4,7 @@ import com.tecsup.aurora_admin.model.Device;
 import com.tecsup.aurora_admin.repository.DeviceRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +22,15 @@ public class DeviceService {
     }
 
     public List<Device> getLostDevices() {
-        // Filtra solo los dispositivos marcados como perdidos (Alerta Roja)
-        return deviceRepository.findByIsLostTrue();
+        // Asegura que no sea null
+        List<Device> list = deviceRepository.findByIsLostTrue();
+        return list != null ? list : new ArrayList<>();
     }
 
     public Optional<Device> findByIdentifier(String identifier) {
         return deviceRepository.findByDeviceIdentifier(identifier);
     }
-    
+
     public long countTotalDevices() {
         return deviceRepository.count();
     }
