@@ -14,9 +14,9 @@
         .sidebar { min-height: 100vh; background: #2c3e50; color: white; }
         .sidebar a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 15px; display: block; }
         .sidebar a:hover, .sidebar a.active { background: #34495e; color: white; border-left: 4px solid #3498db; }
+        .brand-logo { font-size: 1.5rem; font-weight: bold; padding: 20px; text-align: center; background: #1a252f; }
         .card-stat { border-radius: 15px; border: none; transition: transform 0.2s; }
         .card-stat:hover { transform: translateY(-5px); }
-        .brand-logo { font-size: 1.5rem; font-weight: bold; padding: 20px; text-align: center; background: #1a252f; }
     </style>
 </head>
 <body>
@@ -29,15 +29,21 @@
                 <i class="fa-solid fa-location-dot text-info"></i> Aurora
             </div>
             <div class="d-flex flex-column">
-                <a th:href="@{/}" th:classappend="${#httpServletRequest.requestURI == '/' ? 'active' : ''}">
+                
+                <!-- CORRECCIÓN AQUÍ: Usamos #request en lugar de #httpServletRequest -->
+                
+                <a th:href="@{/}" th:classappend="${#request.requestURI == '/' ? 'active' : ''}">
                     <i class="fa-solid fa-chart-line me-2"></i> Dashboard
                 </a>
-                <a th:href="@{/users}" th:classappend="${#httpServletRequest.requestURI == '/users' ? 'active' : ''}">
+                
+                <a th:href="@{/users}" th:classappend="${#request.requestURI == '/users' ? 'active' : ''}">
                     <i class="fa-solid fa-users me-2"></i> Usuarios
                 </a>
-                <a th:href="@{/devices}" th:classappend="${#httpServletRequest.requestURI == '/devices' ? 'active' : ''}">
+                
+                <a th:href="@{/devices}" th:classappend="${#request.requestURI == '/devices' ? 'active' : ''}">
                     <i class="fa-solid fa-mobile-screen me-2"></i> Dispositivos
                 </a>
+                
                 <a href="#" class="mt-auto text-danger">
                     <i class="fa-solid fa-right-from-bracket me-2"></i> Salir
                 </a>
