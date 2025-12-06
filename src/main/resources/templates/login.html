@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login - Aurora Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background: #ecf0f1; display: flex; align-items: center; justify-content: center; height: 100vh; }
-        .login-card { width: 100%; max-width: 400px; border-radius: 15px; border: none; }
-        .login-header { background: #2c3e50; color: white; border-radius: 15px 15px 0 0; padding: 20px; text-align: center; }
+        body { background: #ecf0f1; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .login-card { width: 100%; max-width: 400px; border-radius: 15px; border: none; overflow: hidden; }
+        .login-header { background: #2c3e50; color: white; padding: 30px 20px; text-align: center; }
     </style>
 </head>
 <body>
@@ -15,20 +15,34 @@
 <div class="card login-card shadow-lg">
     <div class="login-header">
         <h3>Aurora Admin</h3>
-        <p class="mb-0 small text-white-50">Acceso restringido</p>
+        <p class="mb-0 small text-white-50">Panel de Administración Seguro</p>
     </div>
     <div class="card-body p-4">
-        <form method="post" action="/login">
+        
+        <!-- Mensaje de error -->
+        <div th:if="${param.error}" class="alert alert-danger text-center p-2 mb-3 small">
+            Credenciales incorrectas
+        </div>
+        
+        <!-- Mensaje de logout -->
+        <div th:if="${param.logout}" class="alert alert-info text-center p-2 mb-3 small">
+            Sesión cerrada correctamente
+        </div>
+
+        <form th:action="@{/login}" method="post">
             <div class="mb-3">
-                <label class="form-label">Usuario</label>
-                <input type="text" name="username" class="form-control" placeholder="admin" required>
+                <label class="form-label text-muted small fw-bold">USUARIO</label>
+                <input type="text" name="username" class="form-control" placeholder="admin" required autofocus>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Contraseña</label>
+            <div class="mb-4">
+                <label class="form-label text-muted small fw-bold">CONTRASEÑA</label>
                 <input type="password" name="password" class="form-control" placeholder="••••••" required>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+            <button type="submit" class="btn btn-primary w-100 py-2">Ingresar</button>
         </form>
+    </div>
+    <div class="card-footer bg-white text-center py-3 border-0">
+        <small class="text-muted">© 2025 Proyecto Aurora</small>
     </div>
 </div>
 
