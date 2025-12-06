@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<body>
+
+<div layout:fragment="content">
+    <h2 class="mb-4">Inventario de Dispositivos</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Dispositivo</th>
+                    <th>Dueño</th>
+                    <th>Identificador (ID)</th>
+                    <th>Estado</th>
+                    <th>Última Vez</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="device : ${devices}">
+                    <td th:text="${device.id}">#</td>
+                    <td th:text="${device.name}" class="fw-bold">Pixel 8</td>
+                    <td th:text="${device.user.email}">user@mail.com</td>
+                    <td th:text="${device.deviceIdentifier}" class="text-muted small">xyz...</td>
+                    <td>
+                        <span th:if="${device.isLost}" class="badge bg-danger animate-pulse">PERDIDO</span>
+                        <span th:unless="${device.isLost}" class="badge bg-success">Seguro</span>
+                    </td>
+                    <td th:text="${#temporals.format(device.lastSeen, 'dd-MM-yyyy HH:mm')}">Date</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-outline-info" title="Ver en Mapa">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

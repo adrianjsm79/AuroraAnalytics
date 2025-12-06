@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <title>Dashboard - Aurora</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h2 class="mb-4">Panel de Control</h2>
+
+    <div class="row g-4 mb-4">
+        <!-- Tarjeta Usuarios -->
+        <div class="col-md-4">
+            <div class="card card-stat bg-primary text-white shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Usuarios Activos</h6>
+                            <h2 class="mt-2 mb-0" th:text="${totalUsers}">0</h2>
+                        </div>
+                        <i class="fa-solid fa-users fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta Dispositivos -->
+        <div class="col-md-4">
+            <div class="card card-stat bg-success text-white shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Dispositivos Totales</h6>
+                            <h2 class="mt-2 mb-0" th:text="${totalDevices}">0</h2>
+                        </div>
+                        <i class="fa-solid fa-mobile fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta Alertas (Perdidos) -->
+        <div class="col-md-4">
+            <div class="card card-stat bg-danger text-white shadow">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Dispositivos Perdidos</h6>
+                            <h2 class="mt-2 mb-0" th:text="${lostDevicesCount}">0</h2>
+                        </div>
+                        <i class="fa-solid fa-triangle-exclamation fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Aquí podrías poner una tabla de "Últimos eventos" -->
+</div>
+
+</body>
+</html>
