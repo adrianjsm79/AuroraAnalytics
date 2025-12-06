@@ -18,25 +18,36 @@ public class DashboardController {
 
     @GetMapping("/")
     public String index(Model model) {
-        // Si alguna de estas funciones devuelve NULL o falla, la vista explota
         model.addAttribute("totalUsers", userService.countActiveUsers());
         model.addAttribute("totalDevices", deviceService.countTotalDevices());
-        model.addAttribute("lostDevicesCount", deviceService.getLostDevices().size()); // <-- OJO AQUÍ
+        model.addAttribute("lostDevicesCount", deviceService.getLostDevices().size());
+        
+        // --- SOLUCIÓN: Le decimos a la vista quién es ---
+        model.addAttribute("activePage", "home");
+        
         return "index";
     }
 
     @GetMapping("/users")
     public String users(Model model) {
         model.addAttribute("users", userService.getAllUsers());
+        
+        // --- SOLUCIÓN ---
+        model.addAttribute("activePage", "users");
+        
         return "users/list";
     }
 
     @GetMapping("/devices")
     public String devices(Model model) {
         model.addAttribute("devices", deviceService.getAllDevices());
+        
+        // --- SOLUCIÓN ---
+        model.addAttribute("activePage", "devices");
+        
         return "devices/list";
     }
-
+    
     @GetMapping("/login")
     public String login() {
         return "login";
